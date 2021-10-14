@@ -103,4 +103,19 @@ class RegistrationController extends Controller
 
         return view('dashboard.registration.index', $data);
     }
+
+    public function cetak_kartu()
+    {
+        $reg = Registration::where('user_id', Auth::user()->id)->first();
+        if ($reg->status == 'diterima' || $reg->status == 'cadangan') {
+            $data = [
+                'title' => 'Cetak Kartu',
+                'registration' => $reg
+            ];
+
+            return view('dashboard.registration.cetak', $data);
+        } else {
+            return redirect()->route('dashboard.index')->with('error', 'Status anda belum diterima');
+        }
+    }
 }

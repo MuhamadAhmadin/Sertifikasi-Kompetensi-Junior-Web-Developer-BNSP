@@ -23,9 +23,12 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::get('/', 'DashboardController@index')->name('index');
 
 
+    Route::get('profile', 'UserController@profile')->name('profile');
+    Route::put('user/update_profile', 'UserController@update_profile')->name('users.update_profile');
     Route::resource('users', 'UserController');
     Route::get('registration/siswa', 'RegistrationController@siswa')->name('registration.siswa');
     Route::get('registration/detail', 'RegistrationController@detail')->name('registration.detail');
+    Route::get('registration/cetak_kartu', 'RegistrationController@cetak_kartu')->name('registration.cetak_kartu');
     Route::resource('registration', 'RegistrationController');
 
 });

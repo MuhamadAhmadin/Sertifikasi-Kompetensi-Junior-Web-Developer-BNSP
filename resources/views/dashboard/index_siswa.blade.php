@@ -16,7 +16,7 @@
 
                 @if ($is_registered->status == 'diterima')
                     <p>Selamat anda sudah <span class="text-success">Diterima</span> menjadi siswa, anda dapat mencetak kartu registrasi siswa anda <a
-                            href="disini">Disini</a></p>
+                            href="{{ route('dashboard.registration.cetak_kartu') }}">Disini</a></p>
                 @elseif($is_registered->status == 'cadangan')
                     <p>Status registrasi anda menjadi Cadangan</p>
                 @elseif($is_registered->status == 'tidak_diterima')

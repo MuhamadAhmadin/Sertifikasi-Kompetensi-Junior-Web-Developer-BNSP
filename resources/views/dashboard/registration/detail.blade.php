@@ -13,14 +13,30 @@
 
         @include('layouts.session_checker')
 
-        <ul class="list-group">
+        <ul class="list-group mb-3">
             <li class="list-group-item">NIS: <b>{{ $registration->user->username }}</b></li>
             <li class="list-group-item">Nama Lengkap: <b>{{ $registration->user->name }}</b></li>
             <li class="list-group-item">Jenis Kelamin: <b>{{ $registration->gender_name() }}</b></li>
             <li class="list-group-item">Alamat: <b>{{ $registration->address }}</b></li>
             <li class="list-group-item">Nilai Akhir: <b>{{ $registration->last_score }}</b></li>
             <li class="list-group-item">Status: <b>{!! $registration->status_label !!}</b></li>
-          </ul>
+        </ul>
+
+        @if ($registration->status == 'diterima')
+            <p>Selamat anda sudah <span class="text-success">Diterima</span> menjadi siswa, anda dapat mencetak kartu
+                registrasi siswa anda <a href="{{ route('dashboard.registration.cetak_kartu') }}">Disini</a></p>
+        @elseif($registration->status == 'cadangan')
+            <p>Status registrasi anda menjadi Cadangan</p>
+        @elseif($registration->status == 'tidak_diterima')
+            <p>Status registrasi anda <span class="text-danger">Ditolak</span></p>
+        @else
+            <p>Pendaftaran anda sudah terkirim dengan status {!! $is_registered->status_label !!}, mohon tunggu verifikasi admin.
+                Lihat lebih lanjut dengan mengklik tombol dibawah ini:</p>
+            <p class="lead">
+                <a class="btn btn-info btn-lg" href="{{ route('dashboard.registration.detail') }}" role="button">Lihat
+                    Status</a>
+            </p>
+        @endif
 
     </main>
 @endsection

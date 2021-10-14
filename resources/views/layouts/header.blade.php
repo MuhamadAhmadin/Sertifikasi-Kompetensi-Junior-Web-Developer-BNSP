@@ -51,7 +51,7 @@
           </ul>
           <form class="form-inline mt-2 mt-md-0 mx-2" action="{{ route('logout') }}" method="POST">
             @csrf
-            <a href="#" class="d-flex">
+            <a href="{{ route('dashboard.profile') }}" class="d-flex">
                 <img src="{{ Auth::user()->get_avatar_url() }}" alt="Avatar" width="50" height="50" style="border-radius: 50%">
                 <span class="d-flex flex-column ml-2">
                     <span class="">{{ Auth::user()->name }}</span>
