@@ -30,17 +30,24 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ route('dashboard.index') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('dashboard.users.index') }}">Pengguna</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pendaftar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Data Siswa</a>
-            </li>
+            @if (Auth::user()->role == 'admin')
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.users.index') }}">Pengguna</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.registration.index') }}">Pendaftar</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.registration.siswa') }}">Data Siswa</a>
+                </li>
+            @else
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.registration.create') }}">Registrasi Siswa</a>
+                </li>
+
+            @endif
           </ul>
           <form class="form-inline mt-2 mt-md-0 mx-2" action="{{ route('logout') }}" method="POST">
             @csrf

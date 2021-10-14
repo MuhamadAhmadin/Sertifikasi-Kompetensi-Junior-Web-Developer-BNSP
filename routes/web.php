@@ -20,10 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth']], function() {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/', 'DashboardController@index')->name('index');
 
 
     Route::resource('users', 'UserController');
+    Route::get('registration/siswa', 'RegistrationController@siswa')->name('registration.siswa');
+    Route::get('registration/detail', 'RegistrationController@detail')->name('registration.detail');
+    Route::resource('registration', 'RegistrationController');
 
 });
 
