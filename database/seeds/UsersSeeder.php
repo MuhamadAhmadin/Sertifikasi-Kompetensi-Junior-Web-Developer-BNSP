@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
@@ -14,18 +15,18 @@ class UsersSeeder extends Seeder
     {
         $data = [
             [
-                'username' => 'super_admin',
-                'name' => 'Super Admin',
-                'email' => 'superadmincovidsumbar@gmail.com',
-                'password' => Hash::make('super_admin'),
-                'role' => 'super_admin'
-            ],
-            [
                 'username' => 'admin',
-                'name' => 'Admin',
-                'email' => 'admincovidsumbar@gmail.com',
+                'name' => 'Administrator',
+                'email' => 'adminpsb@gmail.com',
                 'password' => Hash::make('admin'),
                 'role' => 'admin'
+            ],
+            [
+                'username' => 'siswa',
+                'name' => 'Siswa Muhamad Ahmadin',
+                'email' => 'ahmadinations@gmail.com',
+                'password' => Hash::make('siswa'),
+                'role' => 'siswa'
             ],
         ];
 
