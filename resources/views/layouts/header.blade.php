@@ -12,10 +12,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- Custom styles for this template -->
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    @stack('css')
+
   </head>
 
   <body>
@@ -33,7 +33,7 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pengguna</a>
+              <a class="nav-link" href="{{ route('dashboard.users.index') }}">Pengguna</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Pendaftar</a>
@@ -45,10 +45,10 @@
           <form class="form-inline mt-2 mt-md-0 mx-2" action="{{ route('logout') }}" method="POST">
             @csrf
             <a href="#" class="d-flex">
-                <img src="https://i.pravatar.cc/50" alt="Avatar"  style="border-radius: 50%">
+                <img src="{{ Auth::user()->get_avatar_url() }}" alt="Avatar" width="50" height="50" style="border-radius: 50%">
                 <span class="d-flex flex-column ml-2">
                     <span class="">{{ Auth::user()->name }}</span>
-                    <small class="text-muted">{{ Auth::user()->role }}</small>
+                    <small class="text-muted">{{ Auth::user()->role_name }}</small>
                 </span>
             </a>
             <button class="btn btn-outline-danger my-2 my-sm-0 ml-4" type="submit">Logout</button>
