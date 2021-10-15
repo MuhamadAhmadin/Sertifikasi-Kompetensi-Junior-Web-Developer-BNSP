@@ -20,6 +20,16 @@ class User extends Authenticatable
         }
     }
 
+    public function is_registered()
+    {
+        $is_registered = Registration::where('user_id', $this->id)->first();
+        if ($is_registered) {
+            return '<span class="badge badge-success">Sudah</span>';
+        } else {
+            return '<span class="badge badge-warning">Belum</span>';
+        }
+    }
+
     public function getRoleNameAttribute()
     {
         return $this->role == 'admin' ? 'Administrator' : 'Siswa';

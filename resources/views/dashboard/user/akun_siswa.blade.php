@@ -17,35 +17,31 @@
                     <tr>
                         <th>#</th>
                         <th>Avatar</th>
-                        <th>NIS/Username</th>
-                        <th>Nama Siswa</th>
-                        <th>Alamat</th>
-                        <th>Nomor HP</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Nilai Akhir</th>
-                        <th>Status</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Nama</th>
+                        <th>Sudah Registrasi ?</th>
+                        <th>Role</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($registrations as $item)
+                    @foreach ($users as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ $item->user->get_avatar_url() }}" alt="Avatar" width="50" class="img-thumbnail">
+                                <img src="{{ $item->get_avatar_url() }}" alt="Avatar" width="50" class="img-thumbnail">
                             </td>
-                            <td>{{ $item->user->username }}</td>
-                            <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->address }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->gender_name() }}</td>
-                            <td><b>{{ $item->last_score }}</b></td>
-                            <td>{!! $item->status_label !!}</td>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{!! $item->is_registered() !!}</td>
+                            <td>{{ $item->role_name }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('dashboard.registration.edit', $item->id) }}"
-                                        class="btn btn-sm btn-info">Detail</a>
-                                    <form action="{{ route('dashboard.registration.destroy', $item->id) }}" method="POST">
+                                    <a href="{{ route('dashboard.users.edit', $item->id) }}"
+                                        class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="{{ route('dashboard.users.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger ml-1 buttonDeletion" onclick="return confirm('Yakin ?')">Delete</button>

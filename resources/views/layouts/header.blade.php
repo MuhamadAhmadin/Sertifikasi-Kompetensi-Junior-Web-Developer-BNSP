@@ -32,10 +32,13 @@
             </li>
             @if (Auth::user()->role == 'admin')
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard.users.index') }}">Pengguna</a>
+                <a class="nav-link" href="{{ route('dashboard.users.index') }}">Akun Admin</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard.registration.index') }}">Pendaftar</a>
+                <a class="nav-link" href="{{ route('dashboard.users.akun_siswa') }}">Akun Siswa</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.registration.index') }}">Pendaftar <span class="badge badge-primary badge-pill">{{ \App\Registration::where('status', '=', 'pending')->count() }}</span></a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard.registration.siswa') }}">Data Siswa</a>

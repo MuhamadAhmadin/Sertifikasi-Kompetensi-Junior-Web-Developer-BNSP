@@ -25,6 +25,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
 
     Route::get('profile', 'UserController@profile')->name('profile');
     Route::put('user/update_profile', 'UserController@update_profile')->name('users.update_profile');
+    Route::get('users/akun_siswa', 'UserController@akun_siswa')->name('users.akun_siswa');
     Route::resource('users', 'UserController');
     Route::get('registration/siswa', 'RegistrationController@siswa')->name('registration.siswa');
     Route::get('registration/detail', 'RegistrationController@detail')->name('registration.detail');

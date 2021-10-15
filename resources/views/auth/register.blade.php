@@ -87,7 +87,7 @@
                                 </div> <!-- form-row end.// -->
                                 <div class="form-group">
                                     <label>Email address</label>
-                                    <input type="email" class="form-control" placeholder="">
+                                    <input type="email" class="form-control" placeholder="Email aktif" name="email" value="{{ old('email') }}">
                                 </div> <!-- form-group end.// -->
                                 <div class="form-row">
                                     <div class="form-group col-md-6">

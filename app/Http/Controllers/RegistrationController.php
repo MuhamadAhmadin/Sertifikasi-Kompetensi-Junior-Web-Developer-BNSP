@@ -118,4 +118,10 @@ class RegistrationController extends Controller
             return redirect()->route('dashboard.index')->with('error', 'Status anda belum diterima');
         }
     }
+
+    public function destroy(Request $request, $id)
+    {
+        Registration::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus data');
+    }
 }

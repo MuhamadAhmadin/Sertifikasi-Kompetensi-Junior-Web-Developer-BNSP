@@ -8,7 +8,7 @@
         <hr class="my-4">
         <p>Anda dapat melihat data formulir registrasi siswa dengan menekan tombol dibawah ini:</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Lihat Pendaftar</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('dashboard.registration.index') }}">Lihat Pendaftar</a>
         </p>
     </div>
 </main>

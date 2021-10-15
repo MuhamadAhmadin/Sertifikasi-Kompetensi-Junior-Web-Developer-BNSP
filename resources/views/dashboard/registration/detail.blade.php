@@ -30,12 +30,7 @@
         @elseif($registration->status == 'tidak_diterima')
             <p>Status registrasi anda <span class="text-danger">Ditolak</span></p>
         @else
-            <p>Pendaftaran anda sudah terkirim dengan status {!! $is_registered->status_label !!}, mohon tunggu verifikasi admin.
-                Lihat lebih lanjut dengan mengklik tombol dibawah ini:</p>
-            <p class="lead">
-                <a class="btn btn-info btn-lg" href="{{ route('dashboard.registration.detail') }}" role="button">Lihat
-                    Status</a>
-            </p>
+            <p>Pendaftaran anda sudah terkirim dengan status {!! $registration->status_label !!}, mohon tunggu verifikasi admin.
         @endif
 
     </main>

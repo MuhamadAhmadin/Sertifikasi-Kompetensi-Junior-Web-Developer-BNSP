@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Registration;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,21 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'List Pengguna',
-            'users' => User::all()
+            'title' => 'List Admin',
+            'users' => User::where('role', 'admin')->get()
         ];
 
         return view('dashboard.user.index', $data);
+    }
+
+    public function akun_siswa()
+    {
+        $data = [
+            'title' => 'List Akun Siswa',
+            'users' => User::where('role', 'siswa')->get()
+        ];
+
+        return view('dashboard.user.akun_siswa', $data);
     }
 
     public function create()
@@ -58,6 +69,7 @@ class UserController extends Controller
     public function destroy(Request $request, $id)
     {
         User::findOrFail($id)->delete();
+        Registration::where('user_id', $id)->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
 
@@ -65,7 +77,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $data = [
-            'title' => 'Edit Admin',
+            'title' => 'Edit Akun',
             'user' => $user
         ];
 
