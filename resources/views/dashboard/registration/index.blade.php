@@ -66,7 +66,12 @@
 
     <script>
         $(document).ready(function() {
-            $('#jwd_table').DataTable();
+            $('#jwd_table').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
         });
     </script>
 @endpush
