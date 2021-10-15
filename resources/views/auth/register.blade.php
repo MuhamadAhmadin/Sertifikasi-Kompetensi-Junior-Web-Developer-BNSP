@@ -6,102 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
 
-    <title>{{ $title ?? config('app.name') }}</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+    <title>{{ config('app.name') }}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    @stack('css')
+    <link href="{{ asset('css/cover.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background: url('{{ asset('img/background.png') }}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
+        .form-signin {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .card.card-register > * {
+            color: black !important;
+            text-shadow: none !important;
+        }
+
+    </style>
 </head>
 
-<body>
+<body class="text-center">
 
-    <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link btn btn-outline-primary" href="#">Beranda <span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <form class="form-inline mt-2 mt-md-0 mx-2" action="{{ route('logout') }}" method="POST">
-                    <a class="btn btn-outline-success my-2 my-sm-0 ml-4 text-white">Login</a>
-                    <a class="btn btn-outline-warning my-2 my-sm-0 ml-4 text-white">Registrasi</a>
-                </form>
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead">
+            <div class="inner">
+                <h3 class="masthead-brand">{{ config('app.name') }}</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    @if (Route::has('login'))
+                        @auth
+                            <a class="nav-link active" href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a class="nav-link active" href="{{ route('login') }}">Login</a>
 
+                            @if (Route::has('register'))
+                                <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    @endif
+                </nav>
             </div>
-        </nav>
-    </header>
+        </header>
 
-    <div class="container mt-5 pt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Registrasi Akun</div>
-
-                    <div class="card-body">
-                        @include('layouts.session_checker')
-                        <form method="POST" action="{{ route('register') }}" class="form-row" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group col-md-12">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username"
-                                    value="{{ old('username') }}">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password"
-                                    value="">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Konfirmasi Password</label>
-                                <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Nama</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
+        <main role="main" class="inner cover">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card card-register">
+                        <header class="card-header">
+                            <h4 class="card-title mt-2">Registrasi Akun</h4>
+                        </header>
+                        <article class="card-body">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="text-left">
+                                    @include('layouts.session_checker')
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                                <div class="form-row">
+                                    <div class="col form-group">
+                                        <label>NIS </label>
+                                        <input type="text" class="form-control" name="username"
+                                            value="{{ old('username') }}">
+                                        <small class="text-muted">Digunakan sebagai username akun</small>
+                                    </div> <!-- form-group end.// -->
+                                    <div class="col form-group">
+                                        <div class="form-group col-md-12">
+                                            <label>Nama</label>
+                                            <input type="text" class="form-control" name="name"
+                                                value="{{ old('name') }}">
+                                        </div>
+                                    </div> <!-- form-group end.// -->
+                                </div> <!-- form-row end.// -->
+                                <div class="form-group">
+                                    <label>Email address</label>
+                                    <input type="email" class="form-control" placeholder="">
+                                </div> <!-- form-group end.// -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" name="password" value="">
+                                    </div> <!-- form-group end.// -->
+                                    <div class="form-group col-md-6">
+                                        <label>Konfirmasi Password</label>
+                                        <input id="password-confirm" type="password" class="form-control"
+                                            name="password_confirmation" autocomplete="new-password">
+                                    </div> <!-- form-group end.// -->
+                                </div> <!-- form-row.// -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                                </div> <!-- form-group// -->
+                            </form>
+                        </article> <!-- card-body end .// -->
+                    </div> <!-- card.// -->
+                </div> <!-- col.//-->
+
+            </div> <!-- row.//-->
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Muhamad Ahmadin &copy 2021</p>
             </div>
-        </div>
+        </footer>
     </div>
 
-
-    <!-- Bootstrap core JavaScript
-  ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    @stack('js')
 </body>
 
 </html>
