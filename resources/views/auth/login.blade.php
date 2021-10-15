@@ -1,73 +1,87 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ asset('img/logo.png') }}">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <title>{{ config('app.name') }}</title>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+    <link href="{{ asset('css/cover.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background: url('{{ asset('img/background.png') }}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
 
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .form-signin {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+    </style>
+</head>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+<body class="text-center">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">{{ config('app.name') }}</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    @if (Route::has('login'))
+                        @auth
+                            <a class="nav-link active" href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a class="nav-link active" href="{{ route('login') }}">Login</a>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                            @if (Route::has('register'))
+                                <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    @endif
+                </nav>
             </div>
-        </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <img class="mb-4" src="{{ asset('img/logo.png') }}" alt="" width="72" height="72">
+            <h1 class="cover-heading">Silahkan Login</h1>
+            <p class="lead">Di Aplikasi Penerimaan Siswa Berbasis Web Online, aplikasi ini dibuat sebagai
+                tugas praktek Sertifikasi Kompetensi Junior Web Developer</p>
+
+
+            <form class="form-signin" method="POST" action="{{ route('login') }}">
+                @include('layouts.session_checker')
+                @csrf
+                <label class="sr-only">Username</label>
+                <input type="text" class="form-control mt-1" placeholder="Username/NIS" name="username" required
+                    autofocus>
+                <label class="sr-only">Password</label>
+                <input type="password" class="form-control mt-1" placeholder="Password" name="password" required>
+
+                <button class="btn btn-lg btn-primary btn-block mt-1" type="submit">Login</button>
+            </form>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Muhamad Ahmadin &copy 2021</p>
+            </div>
+        </footer>
     </div>
-</div>
-@endsection
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
