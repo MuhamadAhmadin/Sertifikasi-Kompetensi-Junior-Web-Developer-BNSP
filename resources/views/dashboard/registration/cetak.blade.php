@@ -33,6 +33,7 @@
                     <p class="card-text">{{ $registration->address }}</p>
                     <hr>
                     <span class="lead">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo" width="70" class="mb-1"> <br>
                         {{ config('app.name') }}
                     </span>
                 </div>
