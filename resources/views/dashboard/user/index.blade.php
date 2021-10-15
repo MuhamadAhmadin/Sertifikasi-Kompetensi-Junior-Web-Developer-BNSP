@@ -43,7 +43,8 @@
                                     <form action="{{ route('dashboard.users.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger ml-1 buttonDeletion" onclick="return confirm('Yakin ?')">Delete</button>
+                                        <button class="btn btn-sm btn-danger ml-1 buttonDeletion"
+                                            onclick="return confirm('Yakin ?')">Delete</button>
                                     </form>
                                 </div>
                             </td>
@@ -61,7 +62,12 @@
 
     <script>
         $(document).ready(function() {
-            $('#jwd_table').DataTable();
+            $('#jwd_table').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
         });
     </script>
 @endpush

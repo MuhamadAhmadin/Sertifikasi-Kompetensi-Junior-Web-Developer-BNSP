@@ -10,9 +10,11 @@
     <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}/css/bootstrap.min.css">
+
 
     @stack('css')
+    <link rel="stylesheet" href="{{ asset('') }}/css/buttons.dataTables.min.css">
 
   </head>
 
